@@ -1,0 +1,24 @@
+{
+  "name": "form-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot with node.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "Habibulloh Nuriddin",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^5.3.0",
+    "mongoose": "^7.1.0",
+    "node-fetch": "^2.6.11",
+    "node-telegram-bot-api": "^0.61.0",
+    "nodemon": "^2.0.22",
+    "telegraf": "^4.12.2"
+  }
+}

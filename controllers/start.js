@@ -10,6 +10,9 @@ const UserModel = require("../models/userSchema");
 bot.start(async (ctx) => {
   const user_id = ctx.message.from.id;
   const user = await UserModel.findOne({ id: user_id });
+  const chat = ctx.chat.type;
+
+
   if (user) {
     user.step = 0;
     await user.save();
@@ -90,7 +93,5 @@ bot.on('new_chat_members', async (ctx) => {
   currentUser.addedUserCount += 1;
   await currentUser.save();
 })
-
-
 
 bot.launch()

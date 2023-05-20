@@ -118,6 +118,8 @@ const stepSwitcher = async (user, ctx) => {
       await user.save();
       ctx.telegram.sendMessage(process.env.ADMIN_CHAT_ID,
         `<em>• Yangi foydalanuvchining ma'lumotlari</em>\n
+    Username: <strong>@${user.username}</strong>
+    Username: <strong>@${user.phone_number}</strong>
     Ismi: <strong>${user.firstname}</strong>
     Familiyasi: <strong>${user.lastname}</strong>
     Yoshi: <strong>${user.age}</strong>

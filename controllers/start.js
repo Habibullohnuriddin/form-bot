@@ -5,13 +5,13 @@ const userSchema = require('../models/userSchema')
 const { isMemberInAll } = require('./isMember')
 const { hasAccount, hasFullInfo, stepSwitcher } = require('./hasAccount')
 const UserModel = require("../models/userSchema");
+const { getActiveMembers } = require('./getActiveMembers')
 
 
 bot.start(async (ctx) => {
   const user_id = ctx.message.from.id;
   const user = await UserModel.findOne({ id: user_id });
-  const chat = ctx.chat.type;
-
+  // const chat = ctx.chat.type;
 
   if (user) {
     user.step = 0;
@@ -28,10 +28,23 @@ bot.start(async (ctx) => {
 bot.command('members', async (ctx) => {
   const replyedMessage = ctx.message.reply_to_message;
   const currentUser = await UserModel.findOne({ id: replyedMessage.from.id });
-  if (!currentUser) return;
   const userCount = currentUser.addedUserCount;
+
+  if (!currentUser) return;
   ctx.reply(`${replyedMessage.from.first_name} ${replyedMessage.from.username} ushbu guruhga ${userCount} ta odam qo'shdi`);
 })
+
+
+
+
+bot.command('top', ctx => {
+  getActiveMembers(ctx)
+})
+
+
+
+
+
 
 
 bot.on('callback_query', async (ctx) => {

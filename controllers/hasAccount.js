@@ -11,18 +11,8 @@ async function hasAccount(userId) {
   return Boolean(user);
 }
 
-// const answers = [{ text: 'Ismingizni qaytadan kiriting', prop: 'firstname' }, { text: 'Familiyangizni qaytadan kiriting', prop: 'lastname' }, { text: 'Yoshingizni qaytadan kiriting', prop: 'age' }, { text: 'Manzilingizni qaytadan kiriting', prop: 'location' }, { text: 'telni qayta', prop: 'phoneNumber' }, { text: 'qayerdan toptingiz', prop: 'whereIsFind' }, { text: 'komp bormi', prop: 'hasComputer' }, { text: 'net bormi', prop: "hasInternet" }, { text: 'excel bormi', prop:'hasSoftware' }]
-
 const stepSwitcher = async (user, ctx) => {
   let text = ctx.message?.text;
-  // let hasProp = user[answers[user.step].prop];
-  // console.log('====================================');
-  // console.log(hasProp);
-  // console.log('====================================');
-  // if (!hasProp&&user.step!=0) {
-  //   ctx.reply(answers[user.step].text);
-  //   return;
-  // }
   switch (user.step) {
     case 0:
       user.step = 1;

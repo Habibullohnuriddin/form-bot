@@ -9,6 +9,7 @@ const express = require('express');
 const app = express();
 
 const uri = process.env.MONGO_URI
+module.exports = { uri }
 
 app.use(express.json());
 app.use(cors());

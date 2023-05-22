@@ -34,18 +34,9 @@ bot.command('members', async (ctx) => {
   ctx.reply(`${replyedMessage.from.first_name} ${replyedMessage.from.username} ushbu guruhga ${userCount} ta odam qo'shdi`);
 })
 
-
-
-
-bot.command('top', ctx => {
-  getActiveMembers(ctx)
+bot.command('top', async (ctx) => {
+  await getActiveMembers(ctx)
 })
-
-
-
-
-
-
 
 bot.on('callback_query', async (ctx) => {
 

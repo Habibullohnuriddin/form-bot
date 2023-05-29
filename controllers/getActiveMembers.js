@@ -1,3 +1,4 @@
+const { messages } = require('../lib/messages');
 const userSchema = require('../models/userSchema');
 
 async function getActiveMembers(ctx) {
@@ -7,7 +8,7 @@ async function getActiveMembers(ctx) {
       .sort({ addedUserCount: - 1 })
       .limit(20)
 
-    let allUsers = "";
+    let allUsers = `${messages['/top']}\n\n`;
     topUsers.map((user, index) => {
       let name = user.username ? `@${user.username}` : user.firstname
       allUsers += `${index + 1}. ${name} - ${user.addedUserCount}\n`

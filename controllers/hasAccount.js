@@ -44,7 +44,7 @@ const stepSwitcher = async (user, ctx) => {
         await user.save();
         return ctx.replyWithHTML('Telefon raqamingizni kiriting? \n\nMisol: <b>+998909888954</b>');
       case 5:
-        if (/^[+0-9()\- ]+$/.test(text)) {
+        if (/^(?:\+998)?[0-9]{9}$/.test(text)) {
           user.phoneNumber = text
           user.step = 6
           await user.save()

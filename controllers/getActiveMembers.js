@@ -9,13 +9,14 @@ async function getActiveMembers(ctx) {
       .limit(20)
 
     let allUsers = `${messages['/top']}\n\n`;
+
     topUsers.map((user, index) => {
       let name = user.username ? `@${user.username}` : user.firstname
       allUsers += `${index + 1}. ${name} - ${user.addedUserCount}\n`
     })
     ctx.replyWithHTML(allUsers);
   } catch (error) {
-    ctx.reply("Siz botga a'zo emassiz")
+    ctx.reply(messages['error'])
     console.log(error)
   }
 

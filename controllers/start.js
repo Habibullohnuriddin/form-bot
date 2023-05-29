@@ -9,33 +9,31 @@ const { getActiveMembers } = require('./getActiveMembers')
 
 
 bot.start(async (ctx) => {
+  const chat = ctx.chat.type;
   const user_id = ctx.message.from.id;
   const user = await UserModel.findOne({ id: user_id });
-  // const chat = ctx.chat.type;
 
-  if (user) {
-    user.step = 0;
-    await user.save();
+  if (chat === 'private') {
+    if (user) {
+      user.step = 0;
+      await user.save();
+    } else {
+      const newUser = new UserModel({
+        id: user_id
+      })
+      await newUser.save();
+    }
+
+    await ctx.replyWithHTML(messages['start'], {
+      reply_markup: {
+        inline_keyboard: inline_keyboards
+      }
+    })
   }
-
-  await ctx.replyWithHTML(messages['start'], {
-    reply_markup: {
-      inline_keyboard: inline_keyboards
-    },
-  })
-})
-
-bot.command('members', async (ctx) => {
-  const replyedMessage = ctx.message.reply_to_message;
-  const currentUser = await UserModel.findOne({ id: replyedMessage.from.id });
-  const userCount = currentUser.addedUserCount;
-
-  if (!currentUser) return;
-  ctx.reply(`${replyedMessage.from.first_name} ${replyedMessage.from.username} ushbu guruhga ${userCount} ta odam qo'shdi`);
 })
 
 bot.command('top', async (ctx) => {
-  await getActiveMembers(ctx)
+  getActiveMembers(ctx)
 })
 
 bot.on('callback_query', async (ctx) => {
@@ -93,9 +91,21 @@ Iltimos, avval quyidagi kanallarga ulanishingizni so'raymiz:
 
 bot.on('new_chat_members', async (ctx) => {
   const from = ctx.message.from;
-  const currentUser = await UserModel.findOne({ id: from.id });
-  currentUser.addedUserCount += 1;
-  await currentUser.save();
+  let currentUser = await UserModel.findOne({ id: from.id });
+
+  if (currentUser) {
+    currentUser.addedUserCount += 1;
+    await currentUser.save();
+  } else {
+    // currentUser null, shuning uchun yangi obyektni yaratamiz
+    currentUser = new UserModel({
+      id: from.id,
+      addedUserCount: 1,
+      username: ctx.from.username,
+      firstname: ctx.from.first_name,
+    });
+    await currentUser.save();
+  }
 })
 
 bot.launch()

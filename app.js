@@ -20,9 +20,9 @@ mongoose
   })
   .then(() => {
     app.listen(() => {
-      console.log(`MongoDB-ga ulanish muvaffaqiyatli amalga oshirildi ✅✅✅!`);
+      console.log(`✅ MongoDB-ga ulanish muvaffaqiyatli amalga oshirildi!`);
     });
   })
   .catch((err) => {
-    console.log('MongoDBga ulanishda xatolik:', err);
+    console.log('⚠️ MongoDBga ulanishda xatolik:', err);
   });

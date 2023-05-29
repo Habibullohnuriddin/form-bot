@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   },
   addedUserCount: {
     type: Number,
-    default:0
+    default: 0
   },
   step: {
     type: Number,

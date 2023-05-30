@@ -15,9 +15,11 @@ async function getActiveMembers(ctx) {
       allUsers += `${index + 1}. ${name} - ${user.addedUserCount}\n`
     })
     ctx.replyWithHTML(allUsers);
+
   } catch (error) {
     ctx.reply(messages['error'])
     console.log(error)
+    
   }
 
 }

@@ -21,28 +21,28 @@ const stepSwitcher = async (user, ctx) => {
       case 0:
         user.step = 1;
         await user.save();
-        return await ctx.reply('Ismingizni kiriting:');
+        return await ctx.reply('1. Ismingizni kiriting:');
       case 1:
         user.step = 2;
         user.firstname = text;
         await user.save();
-        return ctx.reply('Familiyangizni kiriting:');
+        return ctx.reply('2. Familiyangizni kiriting:');
       case 2:
         user.step = 3
         user.lastname = text;
         await user.save();
-        return ctx.reply('Yoshingizni kiriting:');
+        return ctx.reply('3. Yoshingizni kiriting:');
       case 3:
         if (isNaN(text)) return ctx.reply("Notogri format");
         user.step = 4
         user.age = text;
         await user.save();
-        return ctx.replyWithHTML('<b>Manzilingizni kiriting:</b> \n\nMisol: <b>Toshkent shahar Chilonzor tumani Choshtepa MFY №1</b>');
+        return ctx.replyWithHTML('4. <b>Manzilingizni kiriting:</b> \n\nMisol: <b>Toshkent shahar Chilonzor tumani Choshtepa MFY №1</b>');
       case 4:
         user.location = text;
         user.step = 5
         await user.save();
-        return ctx.replyWithHTML('Telefon raqamingizni kiriting? \n\nMisol: <b>+998909888954</b>');
+        return ctx.replyWithHTML('5. Telefon raqamingizni kiriting? \n\nMisol: <b>+998909888954</b>');
       case 5:
         if (/^(?:\+998)?[0-9]{9}$/.test(text)) {
           user.phoneNumber = text
@@ -50,8 +50,7 @@ const stepSwitcher = async (user, ctx) => {
           await user.save()
 
           user.phoneNumber = parseInt(ctx.message.text);
-          console.log(user);
-          return ctx.reply('Bizni qayerdan topdingiz?', {
+          return ctx.reply('6. Bizni qayerdan topdingiz?', {
             reply_markup: {
               keyboard: whereIsFind_keyboards,
               resize_keyboard: true,
@@ -68,7 +67,7 @@ const stepSwitcher = async (user, ctx) => {
         user.step = 7
         await user.save()
 
-        return ctx.reply('Kompyuteringiz bormi?', {
+        return ctx.reply('7. Kompyuteringiz bormi?', {
           reply_markup: {
             keyboard: question_keyboards,
             resize_keyboard: true,
@@ -82,7 +81,7 @@ const stepSwitcher = async (user, ctx) => {
         user.step = 8
         await user.save()
 
-        return ctx.reply('Kompyuteringiz internetga ulanganmi?', {
+        return ctx.reply('8. Kompyuteringiz internetga ulanganmi?', {
           reply_markup: {
             keyboard: hasInternet_keyboards,
             resize_keyboard: true,
@@ -96,7 +95,7 @@ const stepSwitcher = async (user, ctx) => {
         user.step = 9
         await user.save()
 
-        return ctx.replyWithHTML('Kompyuteringizda <b>Word</b>, <b>Exel</b> va <b>Telegram</b> bormi?', {
+        return ctx.replyWithHTML('9. Kompyuteringizda <b>Word</b>, <b>Exel</b> va <b>Telegram</b> bormi?', {
           reply_markup: {
             keyboard: question_keyboards,
             resize_keyboard: true,

@@ -54,7 +54,7 @@ const stepSwitcher = async (user, ctx) => {
           await user.save()
 
           user.phoneNumber = parseInt(ctx.message.text);
-          return ctx.reply('<strong>6. Bizni qayerdan topdingiz?</strong>', {
+          return ctx.replyWithHTML('<strong>6. Bizni qayerdan topdingiz?</strong>', {
             reply_markup: {
               keyboard: whereIsFind_keyboards,
               resize_keyboard: true,

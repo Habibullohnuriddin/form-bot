@@ -34,6 +34,25 @@ bot.command('top', async (ctx) => {
   getActiveMembers(ctx)
 })
 
+bot.on('new_chat_members', async (ctx) => {
+  const from = ctx.message.from;
+  let currentUser = await UserModel.findOne({ id: from.id });
+
+  if (currentUser) {
+    currentUser.addedUserCount += 1;
+    await currentUser.save();
+  } else {
+    // currentUser null, shuning uchun yangi obyektni yaratamiz
+    currentUser = new UserModel({
+      id: from.id,
+      addedUserCount: 1,
+      username: ctx.from.username,
+      firstname: ctx.from.first_name,
+    });
+    await currentUser.save();
+  }
+})
+
 bot.on('callback_query', async (ctx) => {
 
   ctx.answerCbQuery().catch(err => { }); //post button bosilganda zagruzkani oldini va errorni oldini oladi
@@ -86,24 +105,5 @@ Iltimos, avval quyidagi kanallarga ulanishingizni so'raymiz:
 @${'Kompyuter_Kursi15KUN'}`);
   }
 });
-
-bot.on('new_chat_members', async (ctx) => {
-  const from = ctx.message.from;
-  let currentUser = await UserModel.findOne({ id: from.id });
-
-  if (currentUser) {
-    currentUser.addedUserCount += 1;
-    await currentUser.save();
-  } else {
-    // currentUser null, shuning uchun yangi obyektni yaratamiz
-    currentUser = new UserModel({
-      id: from.id,
-      addedUserCount: 1,
-      username: ctx.from.username,
-      firstname: ctx.from.first_name,
-    });
-    await currentUser.save();
-  }
-})
 
 bot.launch()

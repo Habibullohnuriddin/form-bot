@@ -3,19 +3,18 @@ require("mongoose")
 require('./controllers')
 require('./core')
 
-const { default: mongoose } = require('mongoose');
+const mongoose = require('mongoose');
 const cors = require('cors')
 const express = require('express');
 const app = express();
 
-
-const uri = process.env.MONGO_URI
+// const uri = process.env.MONGO_URI
 
 app.use(express.json());
 app.use(cors());
 
 mongoose
-  .connect(uri, {
+  .connect('mongodb+srv://nuriddin_off:ju_YC3Y6fA6gsY7@cluster0.jcihehj.mongodb.net/?retryWrites=true&w=majority', {
     useNewUrlParser: true, useUnifiedTopology: true
   })
   .then(() => {

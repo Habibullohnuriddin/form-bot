@@ -18,9 +18,7 @@ bot.start(async (ctx) => {
       user.step = 0;
       await user.save();
     } else {
-      const newUser = new UserModel({
-        id: user_id
-      })
+      const newUser = new UserModel({ id: user_id })
       await newUser.save();
     }
 

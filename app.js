@@ -1,4 +1,3 @@
-require('dotenv').config()
 require("mongoose")
 require('./controllers')
 require('./core')
@@ -7,6 +6,9 @@ const { default: mongoose } = require('mongoose');
 const cors = require('cors')
 const express = require('express');
 const app = express();
+
+require('dotenv').config()
+
 
 const uri = process.env.MONGO_URI
 module.exports = { uri }

@@ -19,9 +19,7 @@ async function getActiveMembers(ctx) {
   } catch (error) {
     ctx.reply(messages['error'])
     console.log(error)
-
   }
-
 }
 
 module.exports = { getActiveMembers }

@@ -1,3 +1,4 @@
+require('dotenv').config()
 require("mongoose")
 require('./controllers')
 require('./core')
@@ -7,11 +8,8 @@ const cors = require('cors')
 const express = require('express');
 const app = express();
 
-require('dotenv').config()
-
 
 const uri = process.env.MONGO_URI
-module.exports = { uri }
 
 app.use(express.json());
 app.use(cors());

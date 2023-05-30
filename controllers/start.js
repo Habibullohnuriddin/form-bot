@@ -7,8 +7,8 @@ const { hasAccount, hasFullInfo, stepSwitcher } = require('./hasAccount')
 const UserModel = require("../models/userSchema");
 const { getActiveMembers } = require('./getActiveMembers')
 
-
 bot.start(async (ctx) => {
+
   const chat = ctx.chat.type;
   const user_id = ctx.message.from.id;
   const user = await UserModel.findOne({ id: user_id });
@@ -24,7 +24,7 @@ bot.start(async (ctx) => {
 
     await ctx.replyWithHTML(messages['start'], {
       reply_markup: {
-        inline_keyboard: inline_keyboards
+        inline_keyboard: inline_keyboards,
       }
     })
   }

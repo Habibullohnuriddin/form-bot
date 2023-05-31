@@ -8,27 +8,31 @@ const UserModel = require("../models/userSchema");
 const { getActiveMembers } = require('./getActiveMembers')
 
 bot.start(async (ctx) => {
+  try {
+    const chat = ctx.chat.type;
+    const user_id = ctx.message.from.id;
+    const user = await UserModel.findOne({ id: user_id });
 
-  const chat = ctx.chat.type;
-  const user_id = ctx.message.from.id;
-  const user = await UserModel.findOne({ id: user_id });
-
-  if (chat === 'private') {
-    if (user) {
-      user.step = 0;
-      await user.save();
-    } else {
-      const newUser = new UserModel({ id: user_id })
-      await newUser.save();
-    }
-
-    await ctx.replyWithHTML(messages['start'], {
-      reply_markup: {
-        inline_keyboard: inline_keyboards,
+    if (chat === 'private') {
+      if (user) {
+        user.step = 0;
+        await user.save();
+      } else {
+        const newUser = new UserModel({ id: user_id })
+        await newUser.save();
       }
-    })
+
+      await ctx.replyWithHTML(messages['start'], {
+        reply_markup: {
+          inline_keyboard: inline_keyboards,
+        }
+      })
+    }
+  } catch (error) {
+    console.log(error);
   }
-})
+});
+
 
 bot.command('top', async (ctx) => {
   getActiveMembers(ctx)
@@ -54,30 +58,33 @@ bot.on('new_chat_members', async (ctx) => {
 })
 
 bot.on('callback_query', async (ctx) => {
+  try {
+    ctx.answerCbQuery(); //post button bosilganda zagruzkani oldini va errorni oldini oladi
+    ctx.deleteMessage(); //ozidan oldingi msgni ochiradi
 
-  ctx.answerCbQuery().catch(err => { }); //post button bosilganda zagruzkani oldini va errorni oldini oladi
-  ctx.deleteMessage().catch(err => { }); //ozidan oldingi msgni ochiradi
+    const bool_info = await hasFullInfo(ctx.from.id);
+    let isMember = await isMemberInAll(ctx);
 
-  const bool_info = await hasFullInfo(ctx.from.id);
-  let isMember = await isMemberInAll(ctx);
-
-  if (isMember === true) {
-    if (bool_info) {
-      await ctx.reply(`⚠️ Siz avval ro'yxatdan o'tgansiz`);
+    if (isMember === true) {
+      if (bool_info) {
+        await ctx.reply(`⚠️ Siz avval ro'yxatdan o'tgansiz`);
+      }
+      else {
+        const isExist = await hasAccount(ctx.from.id);
+        if (!isExist) await userSchema.create({ id: ctx.from.id, username: ctx.from.username, step: 0 });
+        await ctx.replyWithHTML(messages['true'])
+        await ctx.replyWithHTML(messages['info']);
+        const current_user = await userSchema.findOne({ id: ctx.from.id });
+        await stepSwitcher(current_user, ctx);
+      }
     }
     else {
-      const isExist = await hasAccount(ctx.from.id);
-      if (!isExist) await userSchema.create({ id: ctx.from.id, username: ctx.from.username, step: 0 });
-      await ctx.replyWithHTML(messages['true'])
-      await ctx.replyWithHTML(messages['info']);
-      const current_user = await userSchema.findOne({ id: ctx.from.id });
-      await stepSwitcher(current_user, ctx);
+      ctx.reply(messages["false"])
     }
+  } catch (error) {
+    console.log(error);
   }
-  else {
-    ctx.reply(messages["false"])
-  }
-})
+});
 
 bot.on('text', async (ctx) => {
   const username = ctx.from.username;

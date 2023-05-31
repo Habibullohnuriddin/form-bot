@@ -38,24 +38,53 @@ bot.command('top', async (ctx) => {
   getActiveMembers(ctx)
 })
 
+let addedUserCount = 0;
+
 bot.on('new_chat_members', async (ctx) => {
   const from = ctx.message.from;
   let currentUser = await UserModel.findOne({ id: from.id });
 
+  let memberCount = ctx.message.new_chat_members.length;
+  addedUserCount += memberCount;
+
   if (currentUser) {
-    currentUser.addedUserCount += ctx.message.new_chat_members.length;
-    await currentUser.save();
+    currentUser.addedUserCount = addedUserCount;
   } else {
-    // create new user
+    // create newuser
     currentUser = new UserModel({
       id: from.id,
-      addedUserCount: ctx.message.new_chat_members.length,
+      addedUserCount: addedUserCount,
       username: ctx.from.username,
       firstname: ctx.from.first_name,
     });
-    await currentUser.save();
   }
-})
+  await currentUser.save();
+});
+
+
+
+// bot.on('new_chat_members', async (ctx) => {
+//   const from = ctx.message.from;
+//   let currentUser = await UserModel.findOne({ id: from.id });
+
+//   let memberCount = ctx.message.new_chat_members.length;
+
+//   if (currentUser) {
+//     currentUser.addedUserCount += memberCount;
+//     console.log(currentUser.addedUserCount)
+//     console.log(memberCount)
+//     await currentUser.save();
+//   } else {
+//     // create new user
+//     currentUser = new UserModel({
+//       id: from.id,
+//       addedUserCount: memberCount,
+//       username: ctx.from.username,
+//       firstname: ctx.from.first_name,
+//     });
+//     await currentUser.save();
+//   }
+// })
 
 bot.on('callback_query', async (ctx) => {
   try {

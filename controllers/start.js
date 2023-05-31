@@ -43,13 +43,13 @@ bot.on('new_chat_members', async (ctx) => {
   let currentUser = await UserModel.findOne({ id: from.id });
 
   if (currentUser) {
-    currentUser.addedUserCount += 1;
+    currentUser.addedUserCount += ctx.message.new_chat_members.length;
     await currentUser.save();
   } else {
-    // currentUser null, shuning uchun yangi obyektni yaratamiz
+    // create new user
     currentUser = new UserModel({
       id: from.id,
-      addedUserCount: 1,
+      addedUserCount: ctx.message.new_chat_members.length,
       username: ctx.from.username,
       firstname: ctx.from.first_name,
     });
@@ -90,7 +90,6 @@ bot.on('text', async (ctx) => {
   const username = ctx.from.username;
   const user_id = ctx.from.id;
   const chat = ctx.chat.type;
-
 
   const hasFullInfos = await hasFullInfo(ctx.from.id);
 

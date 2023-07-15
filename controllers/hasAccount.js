@@ -114,17 +114,17 @@ const stepSwitcher = async (user, ctx) => {
         user.isFulledInfo = true;
         await user.save();
         ctx.telegram.sendMessage(process.env.ADMIN_CHAT_ID,
-          `<em>• Yangi foydalanuvchining ma'lumotlari</em>\n
-      Username: <strong>@${user.username}</strong>
-      Ismi: <strong>${user.firstname}</strong>
-      Familiyasi: <strong>${user.lastname}</strong>
-      Yoshi: <strong>${user.age}</strong>
-      Manzili: <strong>${user.location}</strong>
-      Nomeri: <strong>${user.phoneNumber}</strong>
-      Qayerdan topgani: <strong>${user.whereIsFind}</strong>
-      Kompyuteri bormi: <strong>${user.hasComputer}</strong>
-      Internetga ulanganmi: <strong>${user.hasInternet}</strong>
-      Dasturlar bormi: <strong>${user.hasSoftware}</strong>
+          `<em>• Yangi o‘quvchining anketasi</em>\n
+1. Username: <strong>@${user.username}</strong>
+2. Ismi: <strong>${user.firstname}</strong>
+3. Familiyasi: <strong>${user.lastname}</strong>
+4. Yoshi: <strong>${user.age}</strong>
+5. Manzili: <strong>${user.location}</strong>
+6. Nomeri: <strong>${user.phoneNumber}</strong>
+7. Qayerdan topgani: <strong>${user.whereIsFind}</strong>
+8. Kompyuteri bormi: <strong>${user.hasComputer}</strong>
+9. Internetga ulanganmi: <strong>${user.hasInternet}</strong>
+10. Dasturlar bormi: <strong>${user.hasSoftware}</strong>
                 `, { parse_mode: 'HTML' })
 
         ctx.reply(`Vaqt ajratganingiz uchun rahmat! Siz bilan albatta bog'lanamiz! 😊`, {

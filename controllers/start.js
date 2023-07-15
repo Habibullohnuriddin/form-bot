@@ -10,14 +10,16 @@ bot.start(async (ctx) => {
   try {
     const chat = ctx.chat.type;
     const user_id = ctx.message.from.id;
+    const username = ctx.message.from.username;
     const user = await UserModel.findOne({ id: user_id });
 
     if (chat === 'private') {
       if (user) {
         user.step = 0;
+        user.username = username; // Username-ni yangilash
         await user.save();
       } else {
-        const newUser = new UserModel({ id: user_id })
+        const newUser = new UserModel({ id: user_id, username })
         await newUser.save();
       }
 

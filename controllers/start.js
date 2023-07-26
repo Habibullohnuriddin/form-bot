@@ -10,18 +10,16 @@ bot.start(async (ctx) => {
   try {
     const chat = ctx.chat.type;
     const user_id = ctx.message.from.id;
-    let username = ctx.message.from.username;
+    const username = ctx.message.from.username;
+    const user = await UserModel.findOne({ id: user_id });
 
     if (chat === 'private') {
-      let user = await UserModel.findOne({ id: user_id });
-
       if (user) {
         user.step = 0;
-        user.username = username || `tg://user?id=${user.userID}`; // Username-ni yangilash yoki yangi link qo'yish
+        user.username = username; // Username-ni yangilash
         await user.save();
       } else {
-        username = username || `tg://user?id=${user.userID}`; // Agar username bo'lmasa, yangi link qo'yish
-        const newUser = new UserModel({ id: user_id, username });
+        const newUser = new UserModel({ id: user_id, username })
         await newUser.save();
       }
 
@@ -29,7 +27,7 @@ bot.start(async (ctx) => {
         reply_markup: {
           inline_keyboard: inline_keyboards,
         }
-      });
+      })
     }
   } catch (error) {
     console.log(error);

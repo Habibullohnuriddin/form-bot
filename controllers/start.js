@@ -10,7 +10,8 @@ bot.start(async (ctx) => {
   try {
     const chat = ctx.chat.type;
     const user_id = ctx.message.from.id;
-    const username = ctx.message.from.username;
+    // const username = ctx.message.from.username;
+    const username = ctx.message.from.username || null;
     const user = await UserModel.findOne({ id: user_id });
 
     if (chat === 'private') {

@@ -125,6 +125,7 @@ const stepSwitcher = async (user, ctx) => {
 8. Kompyuteri bormi: <strong>${user.hasComputer}</strong>
 9. Internetga ulanganmi: <strong>${user.hasInternet}</strong>
 10. Dasturlar bormi: <strong>${user.hasSoftware}</strong>
+[${user.firstname}](tg://user?id=${user_id})
                 `, { parse_mode: 'HTML' })
 
         ctx.reply(`Vaqt ajratganingiz uchun rahmat! Siz bilan albatta bog'lanamiz! 😊`, {

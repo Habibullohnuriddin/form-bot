@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 try {
-  await mongoose.connect('mongodb+srv://nuriddin_off:ju_YC3Y6fA6gsY7@cluster0.jcihehj.mongodb.net/userform?retryWrites=true&w=majority', {
+  mongoose.connect('mongodb+srv://nuriddin_off:ju_YC3Y6fA6gsY7@cluster0.jcihehj.mongodb.net/userform?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     serverSelectionTimeoutMS: 20000,

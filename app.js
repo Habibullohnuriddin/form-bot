@@ -13,15 +13,15 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose
-  .connect('mongodb+srv://nuriddin_off:ju_YC3Y6fA6gsY7@cluster0.jcihehj.mongodb.net/userform?retryWrites=true&w=majority', {
-    useNewUrlParser: true, useUnifiedTopology: true, serverSelectionTimeoutMS: 20000,
-  })
-  .then(() => {
-    app.listen(() => {
-      console.log(`✅ MongoDB-ga ulanish muvaffaqiyatli amalga oshirildi!`);
-    });
-  })
-  .catch((err) => {
-    console.log('⚠️ MongoDBga ulanishda xatolik:', err);
+try {
+  await mongoose.connect('mongodb+srv://nuriddin_off:ju_YC3Y6fA6gsY7@cluster0.jcihehj.mongodb.net/userform?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 20000,
   });
+  app.listen(() => {
+    console.log(`✅ MongoDB-ga ulanish muvaffaqiyatli amalga oshirildi!`);
+  });
+} catch (err) {
+  console.log('⚠️ MongoDBga ulanishda xatolik:', err);
+}

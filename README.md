@@ -1,4 +1,5 @@
-# Form-Bot Telegram bot
+
+# Form telegram bot
 
 Welcome to Form-Bot Telegram Bot Repository! This bot helps users collect information through a series of steps.
 
@@ -10,13 +11,29 @@ Form-bot Telegram bot was created for an educational center that teaches program
 
 ### Prerequisites
 
-Programs and libraries that need to be installed to run the bot: Node.js, Telegram API, MongoDB and Telegraph library
+<p>Programs and libraries that need to be installed to run the bot:</p> 
+<ul>
+  <li>Node.js</li>
+  <li>Telegram API</li>
+  <li>MongoDB</li>
+  <li>Telegraph library</li>
+</ul>
 
 ### Installation
 
-1. Clone the repository: `git clone https://github.com/your-username/form-bot.git`
-2. Install dependencies: `npm install`
-3. Run the bot: `nodemon app.js`
+1. Clone the repository: 
+```
+git clone https://github.com/your-username/form-bot.git
+```
+
+2. Install dependencies: 
+```
+npm install
+```
+3. Run the bot: 
+```
+nodemon app.js
+```
 
 ## Usage
 
@@ -35,6 +52,7 @@ This project is made to order.
 If you want to cooperate, you can contact me!
 
 Email: Habibullahhnuriddin@gmail.com
+
 Telegram: https://t.me/habibullohnuriddin
 
 ## Bot link

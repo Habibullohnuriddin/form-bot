@@ -35,10 +35,10 @@ This project is made to order.
 If you want to cooperate, you can contact me!
 
 Email: Habibullahhnuriddin@gmail.com
-Telegram: @habibullohnuriddin
+Telegram: https://t.me/habibullohnuriddin
 
 ## Bot link
 
 You can contact Form-Bot on Telegram by clicking [here](https://t.me/KK15_anketabot).
 
-Feel free to ask questions or leave feedback! –> Habibullah Nuriddinov
+Feel free to ask questions or leave feedback! –>  https://t.me/habibullohnuriddin

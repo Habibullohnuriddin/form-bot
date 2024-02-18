@@ -156,7 +156,7 @@ const stepSwitcher = async (user, ctx) => {
           { parse_mode: "HTML" }
         );
 
-        ctx.reply(
+        ctx.replyWithHTML(
           `<b>Hurmatli o‘quvchim Siz anketa savollariga javob berdingiz.
 
 ✅ TASDIQLASH UCHUN @Kayumkhadjayev1010 👈 ustozga «Salom ustoz» kalit so‘zini yuboring!</b>`,
